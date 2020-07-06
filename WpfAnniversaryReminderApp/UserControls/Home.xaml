@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="WpfAnniversaryReminderApp.UserControls.Home"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfAnniversaryReminderApp.UserControls"
+             xmlns:vm="clr-namespace:WpfAnniversaryReminderApp.ViewModel"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <vm:HomeViewModel x:Key="HVM"/>
+    </UserControl.Resources>
+
+    <Border  DataContext="{Binding Source={StaticResource HVM}}" Visibility="Visible" BorderThickness="2" BorderBrush="Blue" CornerRadius="8" Margin="30,30,30,30">
+        <StackPanel Margin="3">
+
+            <Button Content="{Binding btnMyProfile, Mode=OneWay}" Command="{Binding ProfileCmd}" Height="25" Name="btnMyProfile" Background="Blue"/>
+            <Separator Height="5"/>
+            <Grid>
+                <!-- CardView Control -->
+                <syncfusion:CardView AllowDrop="False" x:Name="cardView" ItemsSource="{Binding AnniversariesList}" FontStyle="Normal">
+                    <syncfusion:CardView.ItemTemplate>
+                        <DataTemplate>
+                            <ListBox>
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Name:"/>
+                                        <TextBlock Text="{Binding Name}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+                                <ListBoxItem>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="DOB:"/>
+                                        <TextBlock Text="{Binding DOB}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </ListBoxItem>
+                            </ListBox>
+                        </DataTemplate>
+                    </syncfusion:CardView.ItemTemplate>
+                    <syncfusion:CardView.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </syncfusion:CardView.HeaderTemplate>
+                </syncfusion:CardView>
+            </Grid>
+        </StackPanel>
+    </Border>
+
+
+</UserControl>
